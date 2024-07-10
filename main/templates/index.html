@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zeetius - Sports Management & Automation</title>
+    <link rel="icon" type="image/png" href="https://zeetius.com/favicon.ico">
+    <link href="{{ url_for('static', filename='Zeetius - Sports Management & Automation_files/bootstrap.min.css') }}" rel="stylesheet" type="text/css">
+    <link href="{{ url_for('static', filename='Zeetius - Sports Management & Automation_files/font-awesome.min.css') }}" rel="stylesheet" type="text/css">
+    <link href="{{ url_for('static', filename='Zeetius - Sports Management & Automation_files/blue1f6b.css') }}" rel="stylesheet" type="text/css">
+    
+    <style>
+        /* Custom Styles */
+        #chatbot-button {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            border: none;
+            background: none;
+            padding: 0;
+            cursor: pointer;
+            z-index: 1000;
+            animation: pulse 1s infinite;
+            outline: none; /* Remove outline on click */
+        }
+
+        #chatbot-button img {
+            width: 100px; /* Increased size */
+            height: 100px;
+            border-radius: 50%; /* Circular button */
+            transition: transform 0.3s ease;
+        }
+
+        #chatbot-button:hover img {
+            transform: scale(1.1); /* Hover effect */
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.1);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        /* Overlay styles */
+        #chatbot-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 9999;
+        }
+
+        #chatbot-overlay iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        #close-overlay {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: #fff;
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+            z-index: 10000;
+        }
+    </style>
+</head>
+<body>
+    <!-- ***** Header Area Start ***** -->
+    <header class="header-area">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <nav class="main-nav">
+                        <!-- ***** Logo Start ***** -->
+                        <a href="https://zeetius.com/" class="logo">
+                            <img src="{{ url_for('static', filename='Zeetius - Sports Management & Automation_files/logo-zeetius.png') }}" alt="zeetius">
+                        </a>
+                        <!-- ***** Logo End ***** -->
+                        <!-- ***** Menu Start ***** -->
+                        <ul class="nav">
+                            <li><a href="https://zeetius.com/">Home</a></li>
+                            <li class="submenu">
+                                <a href="javascript:;">Discover</a>
+                                <ul>
+                                    <li><a href="https://zeetius.com/Discover/Features">Features</a></li>
+                                    <li><a href="https://zeetius.com/Discover/Sports-Management-Solutions-for-associations">For Association</a></li>
+                                    <li><a href="https://zeetius.com/Discover/Sports-Management-Solutions-for-tournaments">For Tournaments</a></li>
+                                    <li><a href="https://zeetius.com/Discover/Sports-Management-Solutions-for-academies">For Academies</a></li>
+                                    <li><a href="https://zeetius.com/Discover/latest-blogs">Latest Blogs</a></li>
+                                    <li><a href="https://zeetius.com/Discover/Testimonials">Testimonials</a></li> 
+                                </ul>
+                            </li>
+                            <li class="submenu">
+                                <a href="javascript:;">About</a>
+                                <ul>
+                                    <li><a href="https://zeetius.com/About/Company">Company</a></li>
+                                    <li><a href="https://zeetius.com/About/Press-Release">Press Release</a></li>
+                                    <li><a href="https://zeetius.com/About/Company#our-team">Our Team</a></li>
+                                    <li><a href="https://zeetius.com/About/zeetius-case-studies">Case Study</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="https://zeetius.com/Home/Contact">Contact</a></li>
+                            <li class="submenu">
+                                <a href="javascript:;">
+                                    Live
+                                    <img src="{{ url_for('static', filename='Zeetius - Sports Management & Automation_files/live.gif') }}" style="width:20px">
+                                </a>
+                                <ul>
+                                    <li><a href="https://zeetius.com/Live/LiveScore">Badminton Live</a></li>
+                                    <li><a href="https://zeetius.com/Live/TTLiveScore">Table Tennis Live</a></li>
+                                    <li><a href="https://zeetius.com/Live/Results">Results</a></li>
+                                    <li><a href="https://zeetius.com/Live/UpcomingMatches">Upcoming Matches</a></li>
+                                    <li><a href="https://www.youtube.com/channel/UCxtPOehfzpo0lfNC60q0IKg" target="_blank">Live Streaming</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                        <a class="menu-trigger">
+                            <span>Menu</span>
+                        </a>
+                        <!-- ***** Menu End ***** -->
+                        <!-- ***** Header Buttons Start ***** -->
+                        <ul class="header-buttons">
+                            <li><a class="btn-nav-line" href="https://zeetius.com/#" onclick="RequestDemomodal()">Request A Demo</a></li>
+                            <li><a class="btn-nav-primary" target="_blank" href="https://zeetius.com/Home/Login">Sign In</a></li>
+                        </ul>
+                        <!-- ***** Header Buttons End ***** -->
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- ***** Header Area End ***** -->
+    <!-- ***** Welcome Area Start ***** -->
+    <div class="welcome-area" id="welcome">
+        <!-- ***** Header Text Start ***** -->
+        <div class="header-text">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-5 col-md-12 col-sm-12 align-self-center">
+                        <h1>Powering the Future of Sports with Automation</h1>
+                        <p>Digitally Transform Your Sports Management Workflow and Boost Performance with Automation</p>
+                        <div class="email-box">
+                            <div class="input">
+                                <input type="email" id="emailRequestDemo1" placeholder="Enter your email">
+                                <button id="btnsubmit">Submit</button> 
+                            </div>
+                            <div id="warningMessage" class="warning-message" style="color:red;padding-left:15px;"></div> 
+                            <span>Request A Demo</span>
+                        </div>
+                    </div>
+                    <div class="offset-lg-1 col-lg-6 col-md-12 col-sm-12 align-self-center">
+                        <div class="home-img-group">
+                            <div class="home-img img-1 imgfix_top_container" style="overflow: hidden;">
+                                <div id="imgfix_wrapper_layer_1_0" class="imgfix_wrapper_layer" style="position: relative; padding: 0; margin: 0; width: 100%; height: 100%; overflow: hidden;">
+                                    <img src="{{ url_for('static', filename='Zeetius - Sports Management & Automation_files/1.jpg') }}" alt="" class="imgfix_src_img" style="opacity: 1;">
+
+                                </div>
+                            </div>
+                            <div class="home-img img-2 imgfix_top_container" style="overflow: hidden;">
+                                <div id="imgfix_wrapper_layer_1_1" class="imgfix_wrapper_layer" style="position: relative; padding: 0; margin: 0; width: 100%; height: 100%; overflow: hidden;">
+                                    <img src="{{ url_for('static', filename='Zeetius - Sports Management & Automation_files/home-bar-mid1.jpg') }}" alt="" class="imgfix_src_img" style="opacity: 1;">
+
+                                    <!-- ***** Play Button Start ***** -->
+                                    <div class="play-button-wrapper">
+                                    </div>
+                                    <!-- ***** Play Button End ***** -->
+                                </div>
+                            </div>
+                            <div class="home-img img-3 imgfix_top_container" style="overflow: hidden;">
+                                <div id="imgfix_wrapper_layer_1_2" class="imgfix_wrapper_layer" style="position: relative; padding: 0; margin: 0; width: 100%; height: 100%; overflow: hidden;">
+                                    <img src="{{ url_for('static', filename='Zeetius - Sports Management & Automation_files/home-bar-mid2.jpg') }}" alt="" class="imgfix_src_img" style="opacity: 1;">
+                                </div>
+                            </div>
+                            <div class="home-img img-4 imgfix_top_container" style="overflow: hidden;">
+                                <div id="imgfix_wrapper_layer_1_3" class="imgfix_wrapper_layer" style="position: relative; padding: 0; margin: 0; width: 100%; height: 100%; overflow: hidden;">
+                                    <img src="{{ url_for('static', filename='Zeetius - Sports Management & Automation_files/4.jpg') }}" alt="" class="imgfix_src_img" style="opacity: 1;">
+                                </div>
+                            </div>
+                        </div>
+                    </div> 
+                </div>
+            </div>
+        </div>
+        <!-- ***** Header Text End ***** -->
+    </div>
+    <!-- ***** Welcome Area End ***** -->
+    <button id="chatbot-button" onclick="toggleChat()">
+        <img src="{{ url_for('static', filename='Zeetius - Sports Management & Automation_files/Ellipse 2.png') }}" alt="Chatbot">
+    </button>
+
+    <div id="chatbot-overlay">
+        <button id="close-overlay">Close</button>
+       <iframe src="{{url_for('chatbot')}}"></iframe>
+    </div>
+
+    <script>
+        // Initial messages
+        const initialMessages = [
+            "Hi, how are you?",
+            "What help do you want?"
+        ];
+
+        // Function to send initial messages
+        function sendInitialMessages() {
+            initialMessages.forEach(message => {
+                appendMessage(message, 'bot');
+            });
+        }
+
+        // Function to append messages to chat body
+        function appendMessage(text, sender) {
+            const chatBody = document.getElementById('chat-body');
+            const messageElement = document.createElement('div');
+            messageElement.classList.add('message', sender);
+            messageElement.textContent = text;
+            chatBody.appendChild(messageElement);
+            chatBody.scrollTop = chatBody.scrollHeight;
+        }
+
+        // Event listener for chatbot button click
+        document.getElementById('chatbot-button').addEventListener('click', function () {
+            document.getElementById('chatbot-overlay').style.display = 'block';
+            sendInitialMessages(); // Send initial messages when chatbot opens
+        });
+
+        // Event listener to close the overlay
+        document.getElementById('close-overlay').addEventListener('click', function () {
+            document.getElementById('chatbot-overlay').style.display = 'none';
+        });
+    </script>
+</body>
+</html>
